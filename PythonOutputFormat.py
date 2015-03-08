@@ -40,21 +40,21 @@ class PythonOutputFormatCommand(sublime_plugin.TextCommand):
             try:
                 for token in tokenize.tokenize(BytesIO(region_data).readline):
                     if token.type == tokenize.OP:
-                        if token.exact_type in [tokenize.LBRACE, tokenize.LSQB]:
+                        if token.exact_type in {tokenize.LBRACE, tokenize.LSQB}:
                             result.append(self.indent())
                             result.append((token.exact_type, token.string))
                             result.append(self.newline)
                             self.indentation_level += 1
-                        elif token.exact_type in [tokenize.RBRACE, tokenize.RSQB]:
+                        elif token.exact_type in {tokenize.RBRACE, tokenize.RSQB}:
                             if result[-1] != self.newline:
                                 result.append(self.newline)
                             self.indentation_level -= 1
                             result.append(self.indent())
                             result.append((token.exact_type, token.string))
-                        elif token.exact_type == tokenize.COLON:
+                        elif token.exact_type in {tokenize.COLON}:
                             result.append((token.exact_type, token.string))
                             result.append((tokenize.STRING, ' '))
-                        elif token.exact_type == tokenize.COMMA:
+                        elif token.exact_type in {tokenize.COMMA}:
                             result.append((token.exact_type, token.string))
                             result.append(self.newline)
                         else:
