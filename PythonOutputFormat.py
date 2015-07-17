@@ -17,8 +17,8 @@ class PythonOutputFormatCommand(sublime_plugin.TextCommand):
 
     def set_indentation(self):
         """Set internal variable based on the indentation settings of the document."""
-        if self.view.settings_object.get('translate_tabs_to_spaces'):
-            self.indentation = ' ' * self.view.settings_object.get('tab_size')
+        if self.view.settings().get('translate_tabs_to_spaces'):
+            self.indentation = ' ' * self.view.settings().get('tab_size')
         else:
             self.indentation = '\t'
 
