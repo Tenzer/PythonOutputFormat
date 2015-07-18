@@ -6,7 +6,7 @@ The plugin simply adds one action, cleverly named "Python Output Format", which 
 
 It will for instance turn this blob:
 
-    {'details': 'https://github.com/Tenzer/PythonOutputFormat', 'releases': [{'sublime_text': '*', 'tags': True}], 'name': 'Python Output Format'}```
+    {'details': 'https://github.com/Tenzer/PythonOutputFormat', 'releases': [{'sublime_text': '*', 'tags': True}], 'name': 'Python Output Format'}
 
 into this:
 
