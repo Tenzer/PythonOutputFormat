@@ -32,6 +32,10 @@ class PythonOutputFormatCommand(sublime_plugin.TextCommand):
         """Remove extra trailing spaces inserted by the tokenize module."""
         return self.extra_spaces_regex.sub(r'\1', text)
 
+    def fix_ending_newlines(self, text):
+        """Remove any excess newlines and make sure we always end with one newline."""
+        return text.rstrip() + '\n'
+
     def run(self, edit):
         """Main function which is called when the plugin is activated."""
         self.set_indentation()
@@ -74,6 +78,7 @@ class PythonOutputFormatCommand(sublime_plugin.TextCommand):
 
             result_string = tokenize.untokenize(result).decode('utf-8')
             result_string = self.fix_extra_spaces(result_string)
+            result_string = self.fix_ending_newlines(result_string)
 
             self.view.replace(edit, region, result_string)
 
