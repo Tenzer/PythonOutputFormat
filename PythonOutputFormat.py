@@ -1,5 +1,6 @@
 """Sublime Text plugin to format the output of Python programs nicely."""
 
+import re
 import tokenize
 from io import BytesIO
 
@@ -14,6 +15,7 @@ class PythonOutputFormatCommand(sublime_plugin.TextCommand):
     indentation_level = 0
     newline = (tokenize.NL, '\n')
     indentation = '    '
+    extra_spaces_regex = re.compile(r' (,?)$', re.MULTILINE)
 
     def set_indentation(self):
         """Set internal variable based on the indentation settings of the document."""
@@ -25,6 +27,10 @@ class PythonOutputFormatCommand(sublime_plugin.TextCommand):
     def indent(self):
         """Return the indentation needed at the current level."""
         return (tokenize.INDENT, self.indentation * self.indentation_level)
+
+    def fix_extra_spaces(self, text):
+        """Remove extra trailing spaces inserted by the tokenize module."""
+        return self.extra_spaces_regex.sub(r'\1', text)
 
     def run(self, edit):
         """Main function which is called when the plugin is activated."""
@@ -66,7 +72,10 @@ class PythonOutputFormatCommand(sublime_plugin.TextCommand):
                 sublime.status_message(str(error))
                 return
 
-            self.view.replace(edit, region, tokenize.untokenize(result).decode('utf-8'))
+            result_string = tokenize.untokenize(result).decode('utf-8')
+            result_string = self.fix_extra_spaces(result_string)
+
+            self.view.replace(edit, region, result_string)
 
         if self.view.settings().get('syntax') == 'Packages/Text/Plain text.tmLanguage':
             self.view.set_syntax_file('Packages/Python/Python.tmLanguage')
