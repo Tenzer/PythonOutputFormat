@@ -25,3 +25,12 @@ into this:
 # Installation
 
 The package is available via [Package Control](https://sublime.wbond.net/) under the name "Python Output Format".
+
+
+## Keyboard Shortcut
+
+If you prefer to have a keyboard shortcut to trigger the "Python Output Format" action with, you can add it by opening your user keybindings in Sublime Text and add an entry like the following to the array:
+
+    { "keys": ["super+ctrl+y"], "command": "python_output_format" }
+
+You can of course specify the keyboard combination you prefer. Save the file and it will take effect immediately.
