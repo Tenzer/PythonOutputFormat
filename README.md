@@ -1,6 +1,6 @@
 # Python Output Format
 
-A simple plugin for Sublime Text inspired by [Pretty JSON](https://packagecontrol.io/packages/Pretty JSON) for formatting printed output from Python programs into a more easily readable format.
+A simple plugin for Sublime Text inspired by [Pretty JSON](https://packagecontrol.io/packages/Pretty%20JSON) for formatting printed output from Python programs into a more easily readable format.
 
 The plugin simply adds one action, cleverly named "Python Output Format", which either takes the text you have selected, or, if nothing is selected, the entire active document, and attempts to format it in a way that is more easy to read.
 
